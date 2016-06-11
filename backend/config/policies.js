@@ -19,6 +19,9 @@
 
 module.exports.policies = {
 
+   PaymentController : {
+      putPayment : 'sessionAuth'
+   }
   /***************************************************************************
   *                                                                          *
   * Default policy for all controllers and actions (`true` allows public     *
