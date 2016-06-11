@@ -10,16 +10,23 @@
 var q = require('q')
 module.exports = function(req, res, next) {
    q.spawn(function*() {
-      //TODO check token at redis
-      if (true) {
-         req.user = yield User.findOne()
-         req.token = yield Token.findOne()
-         return next();
-      }
+      try {
+         //TODO check token at redis
+         if (true) {
+            req.user = yield User.find().limit(1)
+            req.user = req.user[0]
+            req.token = yield Token.find().limit(1)
+            req.token = req.token[0]
+            return next();
+         }
 
-      // User is not allowed
-      // (default res.forbidden() behavior can be overridden in `config/403.js`)
-      return res.forbidden('You are not permitted to perform this action.');
+         // User is not allowed
+         // (default res.forbidden() behavior can be overridden in `config/403.js`)
+         return res.forbidden('You are not permitted to perform this action.');
+      } catch (e){
+         console.error(e)
+         res.serverError()
+      }
    })
 
 };

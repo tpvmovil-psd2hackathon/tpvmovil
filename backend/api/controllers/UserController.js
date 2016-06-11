@@ -8,7 +8,8 @@ function login(req, res){
       try {
          var user = yield UserService.checkUser(req.body.username, req.body.pass)
          var api_token = yield OpenBankService.getToken(user.api_user, user.api_pass)
-         var token = yield UserService.createToken(user, api_token)
+         console.log("AAAAAAa " , api_token);
+         var token = yield UserService.createToken(user, api_token.token)
          res.send(token)
       } catch (e){
          console.error(e)

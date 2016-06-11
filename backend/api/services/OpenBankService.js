@@ -12,7 +12,8 @@ module.exports = {
             'Content-Type': 'application/json',
             'Authorization':
                `DirectLogin username="${username}", password="${pass}", consumer_key="${consumerKey}"`
-         }
+         },
+         json: true
       };
 
       return rp(options);

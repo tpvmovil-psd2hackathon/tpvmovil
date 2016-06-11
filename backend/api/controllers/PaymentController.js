@@ -11,7 +11,7 @@ function requestPayment (req, res) {
    PaymentService.requestPayment(req.body.customer, req.body.hash, req.token.api_token).then(function (data) {
       res.send(data);
    }).catch(function (e) {
-      res.badRequest();
+      res.badRequest(e);
    });
 }
 

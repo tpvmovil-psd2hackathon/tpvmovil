@@ -10,7 +10,7 @@ module.exports = {
       },
       currency : {
          type : 'string',
-         required : true
+         required : false
       },
       description : {
          type : 'string',
