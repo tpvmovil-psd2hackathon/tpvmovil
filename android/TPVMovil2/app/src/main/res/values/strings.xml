@@ -8,4 +8,6 @@
 
     <string name="create_payment">Create Payment</string>
     <string name="list_payments">List Payments</string>
+    <string name="amount_label">Amount:</string>
+    <string name="description_label">Payment description:</string>
 </resources>

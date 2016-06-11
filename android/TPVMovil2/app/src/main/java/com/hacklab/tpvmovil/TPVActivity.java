@@ -9,11 +9,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+
 import com.crashlytics.android.Crashlytics;
+import com.hacklab.tpvmovil.service.dto.PaymentDetailsDTO;
+import com.hacklab.tpvmovil.service.enumerations.Currency;
+
 import io.fabric.sdk.android.Fabric;
 
 public class TPVActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    EditText amountEditText;
+    Spinner currencySpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +42,13 @@ public class TPVActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        currencySpinner = (Spinner) findViewById(R.id.currency);
+
+        ArrayAdapter<Currency> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, Currency.values());
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        currencySpinner.setAdapter(adapter);
+
     }
 
     @Override
