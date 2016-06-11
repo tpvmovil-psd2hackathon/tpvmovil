@@ -26,7 +26,8 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "sails": "sails lift"
   },
   "main": "app.js",
   "repository": {
@@ -34,5 +35,8 @@
     "url": "git://github.com/anonymous node/sails user/tpvmovil.git"
   },
   "author": "anonymous node/sails user",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "sails-cli": "^0.1.3"
+  }
 }
