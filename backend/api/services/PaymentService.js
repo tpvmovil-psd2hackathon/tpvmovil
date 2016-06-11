@@ -58,5 +58,7 @@ function getPayment(hash) {
 }
 
 function putPayment(payment){
+   var hash = parseInt(Math.random()*1000000000000000).toString(16)
+   payment.hash = hash
    return Payment.create(payment)
 }
