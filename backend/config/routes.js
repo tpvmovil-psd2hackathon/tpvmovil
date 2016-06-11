@@ -36,7 +36,7 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-   'POST /api/login-customer': "UserController.loginCustomer",
+   'POST /api/login-customer': "CostumerController.loginCustomer",
    'GET /api/payment' : "PaymentController.getPayment",
    'PUT /api/payment' : "PaymentController.putPayment"
 
