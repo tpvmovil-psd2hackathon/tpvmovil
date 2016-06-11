@@ -34,8 +34,9 @@ function putPayment(req, res){
          var payment = req.body.payment
          payment.user = req.user
          //TODO check payment
-         yield PaymentService.putPayment(payment)
-         res.created()
+         var createdPayment = yield PaymentService.putPayment(payment)
+         console.log(createdPayment)
+         res.send(createdPayment)
       } catch (e){
          console.error(e)
          res.serverError()
