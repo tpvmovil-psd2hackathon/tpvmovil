@@ -53,17 +53,10 @@ function requestPayment(customer, hash) {
 }
 
 function getPayment(hash) {
-   //return Payment.find({hash})
-   return new Promise(function(resolve, refuse){
-      resolve({
-         amount : '40',
-         currency : 'EUR',
-         description : 'Something nice'
-      })
-   })
+   //TODO remove sensitive data
+   return Payment.findOne({hash}).populate('user')
 }
 
 function putPayment(payment){
-   //return Payment.save(payment)
-   return new Promise(function(resolve){resolve()})
+   return Payment.create(payment)
 }
