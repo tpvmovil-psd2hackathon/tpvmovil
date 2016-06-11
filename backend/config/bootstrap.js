@@ -27,7 +27,7 @@ module.exports.bootstrap = function(cb) {
             amount : 40,
             currency : 'EUR',
             description : 'Something nice',
-            User : user
+            user : user
          })
          console.log(payment)
          console.log(user)
