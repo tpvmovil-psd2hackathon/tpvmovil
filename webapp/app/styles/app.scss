@@ -14,3 +14,12 @@
 .desc {
   margin: 30px 0;
 }
+
+.link {
+  cursor: pointer;
+  padding: 10px;
+  border: solid 1px black;
+  &:hover {
+    background-color: #eee;
+  }
+}
