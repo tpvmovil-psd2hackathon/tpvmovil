@@ -1,9 +1,9 @@
 module.exports = {
-   loginClient
+   loginCustomer
 };
 
 
-function loginClient(req, res) {
+function loginCustomer(req, res) {
    console.log("LOGIN");
    LoginService.getUserToken(req.body.user, req.body.pass).then(function (data) {
       res.send(data)
