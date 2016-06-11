@@ -5,4 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="create_payment">Create Payment</string>
+    <string name="list_payments">List Payments</string>
 </resources>
