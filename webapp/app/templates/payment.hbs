@@ -3,6 +3,9 @@
     <h2 class="text-center">Requested payment</h2>
 
     <p class="amount">{{model.currency}} {{model.amount}}</p>
+
+    <p class="text-center">to <strong>{{model.user.name}} {{model.user.lastName}}</strong> ({{model.user.company}})</p>
+
     <p class="desc">{{model.description}}</p>
 
     {{#if error}}

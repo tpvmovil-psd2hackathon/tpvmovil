@@ -1,0 +1,15 @@
+<section class="container-fluid">
+  <div class="main-container">
+
+    <h1>Accounts details</h1>
+
+    {{#each model as |account|}}
+      <p>
+        {{account.label}}
+        {{account._links.detail.href}}
+      </p>
+    {{/each}}
+    {{outlet}}
+
+  </div>
+</section>

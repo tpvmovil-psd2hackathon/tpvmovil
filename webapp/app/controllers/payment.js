@@ -18,14 +18,14 @@ export default Ember.Controller.extend({
       this.set('error', false);
       this.get('ajax').post('/login-customer', {
         data: {
-          user: this.get('email'),
-          pass: this.get('password'),
+          customerName: this.get('email'),
+          customerPass: this.get('password'),
         },
-      }).then(() => {
-        console.log('ok');
-      }, () => {
-        this.set('error', 'ERROR');
-        console.log('nok');
+      }).then(res => {
+        this.get('ajax').set('myToken', res.token);
+        this.transitionToRoute('accounts');
+      }, (e) => {
+        this.set('error', e);
       });
     },
   },
