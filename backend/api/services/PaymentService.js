@@ -12,7 +12,12 @@ var consumerKey = 'r4yhegdmtgbj4gnzbaabg0eludveqd53zxtxgdvg';
 
 
 function requestPayment(customer, hash) {
-   return Payment.find({ where: { hash: hash }}).populate('user').then(function (paymentInfo) {
+   return Payment.find({ where: { hash: hash }}).populate('user').then(function (paymentInfos) {
+
+      var paymentInfo = paymentInfos[0];
+
+      console.log(customer, hash, paymentInfo);
+
       var BANK_ID = customer.bank_id;
       var ACCOUNT_ID = customer.account_id;
       var VIEW_ID = "owner";
@@ -31,13 +36,16 @@ function requestPayment(customer, hash) {
       }
 
       var options = {
-         url: `https://apisandbox.openbankproject.com/banks/${BANK_ID}/accounts/${ACCOUNT_ID}/${VIEW_ID}/transaction-request-types/${TRANSACTION_REQUEST_TYPE}/transaction-requests`,
+         url: `https://apisandbox.openbankproject.com/obp/v1.4.0/banks/${BANK_ID}/accounts/${ACCOUNT_ID}/${VIEW_ID}/transaction-request-types/${TRANSACTION_REQUEST_TYPE}/transaction-requests`,
          method: 'POST',
          headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization' : 'DirectLogin token=' + token
          },
          json: payload
       };
+
+      console.log(options.url);
 
       return rp(options);
    });

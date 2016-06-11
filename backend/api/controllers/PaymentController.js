@@ -10,7 +10,7 @@ function requestPayment (req, res) {
    PaymentService.requestPayment(req.body.customer, req.body.hash).then(function (data) {
       res.send(data);
    }).catch(function (e) {
-      res.badRequest("Operation invalid");
+      res.badRequest(e);
    });
 }
 
