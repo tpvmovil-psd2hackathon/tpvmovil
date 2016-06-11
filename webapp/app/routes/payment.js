@@ -11,7 +11,6 @@ export default Ember.Route.extend({
 
   model(params) {
     return this.get('ajax').request('/payment', {
-      method: 'GET',
       data: {
         hash: params.hash,
       },
