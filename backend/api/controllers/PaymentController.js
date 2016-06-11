@@ -1,11 +1,17 @@
 module.exports = {
    putPayment,
-   getPayment
-
+   getPayment,
+   requestPayment
 };
+
 var q = require('q')
 
 function requestPayment (req, res) {
+   PaymentService.requestPayment(req.body.customer, req.body.hash).then(function (data) {
+      res.send(data);
+   }).catch(function (e) {
+      res.badRequest("Operation invalid");
+   });
 }
 
 function getPayment (req, res) {
