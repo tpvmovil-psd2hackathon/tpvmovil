@@ -20,30 +20,30 @@ function requestPayment(customer, hash, api_token) {
 
       var BANK_ID = customer.bank_id;
       var ACCOUNT_ID = customer.account_id;
-      var VIEW_ID = "accountant"//"owner";
+      var VIEW_ID = "owner";
       var TRANSACTION_REQUEST_TYPE = "SANDBOX_TAN";
 
-      // var payload = {
-      //    "to": {
-      //       "bank_id": paymentInfo.user.bank_id,
-      //       "account_id": paymentInfo.user.account_id
-      //    },
-      //    "value": {
-      //       "currency": paymentInfo.currency,
-      //       "amount": paymentInfo.amount
-      //    },
-      //    "description": paymentInfo.description
-      // }
-
       var payload = {
-         "bank_id": paymentInfo.user.bank_id,
-         "account_id": paymentInfo.user.account_id,
-         "amount": paymentInfo.amount +""
+         "to": {
+            "bank_id": paymentInfo.user.bank_id,
+            "account_id": paymentInfo.user.account_id
+         },
+         "value": {
+            "currency": paymentInfo.currency,
+            "amount": paymentInfo.amount
+         },
+         "description": paymentInfo.description
       }
 
+      // var payload = {
+      //    "bank_id": paymentInfo.user.bank_id,
+      //    "account_id": paymentInfo.user.account_id,
+      //    "amount": paymentInfo.amount +""
+      // }
+
       var options = {
-         url: `https://apisandbox.openbankproject.com/obp/v2.0.0/banks/${BANK_ID}/accounts/${ACCOUNT_ID}/${VIEW_ID}/transactions`,
-            //`https://apisandbox.openbankproject.com/obp/v2.0.0/banks/${BANK_ID}/accounts/${ACCOUNT_ID}/${VIEW_ID}/transaction-request-types/${TRANSACTION_REQUEST_TYPE}/transaction-requests`,
+         url: //`https://apisandbox.openbankproject.com/obp/v2.0.0/banks/${BANK_ID}/accounts/${ACCOUNT_ID}/${VIEW_ID}/transactions`,
+            `https://apisandbox.openbankproject.com/obp/v2.0.0/banks/${BANK_ID}/accounts/${ACCOUNT_ID}/${VIEW_ID}/transaction-request-types/${TRANSACTION_REQUEST_TYPE}/transaction-requests`,
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',
