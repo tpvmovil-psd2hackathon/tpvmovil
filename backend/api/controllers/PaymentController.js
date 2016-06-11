@@ -9,13 +9,15 @@ function requestPayment (req, res) {
 }
 
 function getPayment (req, res) {
+   console.log(req)
    q.spawn(function*(){
       try {
-         var hash = req.body.hash
+         var hash = req.query.hash
          //TODO check hash
          var response = yield PaymentService.getPayment(hash)
          res.send(response)
       } catch (e) {
+         console.log(e)
          res.serverError()
       }
    })
