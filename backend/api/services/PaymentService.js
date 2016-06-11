@@ -18,15 +18,15 @@ function requestPayment(customer, hash, api_token) {
 
       console.log(customer, hash, paymentInfo);
 
-      var BANK_ID = customer.bank_id;
-      var ACCOUNT_ID = customer.account_id;
-      var VIEW_ID = "owner";
+      var BANK_ID = paymentInfo.user.bank_id
+      var ACCOUNT_ID = paymentInfo.user.account_id
+      var VIEW_ID = "VIEW_ID"
       var TRANSACTION_REQUEST_TYPE = "SANDBOX_TAN";
 
       var payload = {
          "to": {
-            "bank_id": paymentInfo.user.bank_id,
-            "account_id": paymentInfo.user.account_id
+            "bank_id": customer.bank_id,
+            "account_id": customer.account_id
          },
          "value": {
             "currency": paymentInfo.currency,
@@ -35,15 +35,10 @@ function requestPayment(customer, hash, api_token) {
          "description": paymentInfo.description
       }
 
-      // var payload = {
-      //    "bank_id": paymentInfo.user.bank_id,
-      //    "account_id": paymentInfo.user.account_id,
-      //    "amount": paymentInfo.amount +""
-      // }
+
 
       var options = {
-         url: //`https://apisandbox.openbankproject.com/obp/v2.0.0/banks/${BANK_ID}/accounts/${ACCOUNT_ID}/${VIEW_ID}/transactions`,
-            `https://apisandbox.openbankproject.com/obp/v2.0.0/banks/${BANK_ID}/accounts/${ACCOUNT_ID}/${VIEW_ID}/transaction-request-types/${TRANSACTION_REQUEST_TYPE}/transaction-requests`,
+         url: `https://apisandbox.openbankproject.com/obp/v2.0.0/banks/${BANK_ID}/accounts/${ACCOUNT_ID}/${VIEW_ID}/transaction-request-types/${TRANSACTION_REQUEST_TYPE}/transaction-requests`,
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',
@@ -52,7 +47,7 @@ function requestPayment(customer, hash, api_token) {
          json: payload
       };
 
-      console.log(options.url);
+      console.log(options);
 
       return rp(options);
    });
