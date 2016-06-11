@@ -4,7 +4,8 @@ module.exports = {
          type : 'string',
          required : true
       },
-      passHash : {
+      //TODO add hash
+      pass : {
          type : 'string',
          required : true
       },
