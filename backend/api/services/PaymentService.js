@@ -46,7 +46,7 @@ function requestPayment(customer, hash) {
 
 function getPayment(hash) {
    //TODO remove sensitive data
-   return Payment.find({hash}).populate('user')
+   return Payment.findOne({hash}).populate('user')
 }
 
 function putPayment(payment){
