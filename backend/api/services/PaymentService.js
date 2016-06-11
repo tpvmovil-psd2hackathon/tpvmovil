@@ -11,7 +11,7 @@ var q = require('q');
 var consumerKey = 'r4yhegdmtgbj4gnzbaabg0eludveqd53zxtxgdvg';
 
 
-function requestPayment(customer, hash) {
+function requestPayment(customer, hash, api_token) {
    return Payment.find({ where: { hash: hash }}).populate('user').then(function (paymentInfos) {
 
       var paymentInfo = paymentInfos[0];
@@ -40,7 +40,7 @@ function requestPayment(customer, hash) {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',
-            'Authorization' : 'DirectLogin token=' + req.token.api_token
+            'Authorization' : 'DirectLogin token=' + api_token
          },
          json: payload
       };

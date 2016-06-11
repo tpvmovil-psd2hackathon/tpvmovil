@@ -20,7 +20,8 @@
 module.exports.policies = {
 
    PaymentController : {
-      putPayment : 'sessionAuth'
+      putPayment : 'sessionAuth',
+      requestPayment: 'sessionAuth'
    }
   /***************************************************************************
   *                                                                          *
