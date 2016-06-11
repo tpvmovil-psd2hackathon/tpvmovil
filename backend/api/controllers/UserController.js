@@ -1,8 +1,16 @@
-module.exports = {   
-   
-   login: function (req, res) {
-      req.badRequest
-   }
+module.exports = {
+   login
+}
+var q = require('q')
 
-
-};
+function login(req, res){
+   q.spawn(function*(){
+      try {
+         var user = yield UserService.findOne(req.body.username, req.body.pass)
+         res.send(user)
+      } catch (e){
+         console.error(e)
+         res.serverError()
+      }
+   })
+}
