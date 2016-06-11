@@ -32,9 +32,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  },
+  // '/': {
+  //   view: 'homepage'
+  // },
 
    'POST /api/login-customer': "CustomerController.loginCustomer",
    'GET /api/payment' : "PaymentController.getPayment",

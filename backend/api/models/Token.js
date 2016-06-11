@@ -3,7 +3,7 @@ module.exports = {
       user : {
          model : 'User'
       },
-      token : {
+      api_token : {
          type : 'string',
          required : 'true'
       }

@@ -9,6 +9,6 @@ function checkUser (username, userPass) {
    return User.findOne({username : 'pepe'})
 }
 
-function createToken (user, token) {
-   return Token.create({user, token})
+function createToken (user, api_token) {
+   return Token.create({user, api_token})
 }

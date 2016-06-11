@@ -40,7 +40,7 @@ function requestPayment(customer, hash) {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',
-            'Authorization' : 'DirectLogin token=' + token
+            'Authorization' : 'DirectLogin token=' + req.token.api_token
          },
          json: payload
       };
