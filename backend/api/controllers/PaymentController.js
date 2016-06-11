@@ -9,7 +9,6 @@ function requestPayment (req, res) {
 }
 
 function getPayment (req, res) {
-   console.log(req)
    q.spawn(function*(){
       try {
          var hash = req.query.hash
@@ -17,7 +16,7 @@ function getPayment (req, res) {
          var response = yield PaymentService.getPayment(hash)
          res.send(response)
       } catch (e) {
-         console.log(e)
+         console.error(e)
          res.serverError()
       }
    })
@@ -31,6 +30,7 @@ function putPayment(req, res){
          yield PaymentService.putPayment(payment)
          res.created()
       } catch (e){
+         console.error(e)
          res.serverError()
       }
    })
