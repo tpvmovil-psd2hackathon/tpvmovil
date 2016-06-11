@@ -48,6 +48,9 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
 
+    // Retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+
     // Crashlytics
     compile('com.crashlytics.sdk.android:crashlytics:2.5.6@aar') {
         transitive = true;
