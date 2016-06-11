@@ -34,7 +34,9 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
+
+   'POST /api/request-payment': "PaymentController.requestPayment"
 
   /***************************************************************************
   *                                                                          *
