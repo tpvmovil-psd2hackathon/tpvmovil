@@ -9,9 +9,10 @@
  */
 module.exports = function(req, res, next) {
 
-  //TODO get Token from redis
+  //TODO check token at redis
    if (true) {
       req.user = User.findOne()
+      req.token = Token.findOne()
       return next();
   }
 
