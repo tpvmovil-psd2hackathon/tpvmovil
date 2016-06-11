@@ -15,6 +15,9 @@ module.exports = {
       description : {
          type : 'string',
          required : true
+      },
+      username: {
+         model: 'User'
       }
 
    }
