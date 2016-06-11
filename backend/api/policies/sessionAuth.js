@@ -7,16 +7,19 @@
  * @docs        :: http://sailsjs.org/#!/documentation/concepts/Policies
  *
  */
+var q = require('q')
 module.exports = function(req, res, next) {
+   q.spawn(function*() {
+      //TODO check token at redis
+      if (true) {
+         req.user = yield User.findOne()
+         req.token = yield Token.findOne()
+         return next();
+      }
 
-  //TODO check token at redis
-   if (true) {
-      req.user = User.findOne()
-      req.token = Token.findOne()
-      return next();
-  }
+      // User is not allowed
+      // (default res.forbidden() behavior can be overridden in `config/403.js`)
+      return res.forbidden('You are not permitted to perform this action.');
+   })
 
-  // User is not allowed
-  // (default res.forbidden() behavior can be overridden in `config/403.js`)
-  return res.forbidden('You are not permitted to perform this action.');
 };
