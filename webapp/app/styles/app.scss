@@ -1,12 +1,14 @@
 @import 'bootstrap';
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+$green: #008000;
 
 body {
   font-family: Roboto;
 }
 
 .btn {
-  border: none;
+  border: 0;
   border-radius: 0;
 }
 
@@ -15,8 +17,8 @@ body {
 }
 
 .btn-primary {
-  width: 100%;
   line-height: 2em;
+  width: 100%;
 }
 
 .form-control {
@@ -24,8 +26,8 @@ body {
 }
 
 .main-container {
-  max-width: 400px;
   margin: 50px auto;
+  max-width: 400px;
 }
 
 .amount {
@@ -61,7 +63,7 @@ body {
   color: white;
   font-size: 72px;
   margin-top: 30px;
-  background-color: green;
+  background-color: $green;
   border-radius: 50%;
   width: 100px;
   height: 100px;
@@ -70,6 +72,6 @@ body {
 .ok-text {
   font-weight: bold;
   text-align: center;
-  color: green;
+  color: $green;
   font-size: 24px;
 }

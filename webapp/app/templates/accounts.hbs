@@ -13,7 +13,7 @@
       <p><strong>Type</strong> {{details.type}}</p>
       <p><strong>IBAN</strong> {{details.IBAN}}</p>
       <p><strong>Balance</strong> {{details.balance.currency}} {{details.balance.amount}}</p>
-      <button class="btn btn-primary" {{action 'pay' details.id details.bank_id}}>Pay using this account</button>
+      {{#if (not allOk)}}<button class="btn btn-primary" {{action 'pay' details.id details.bank_id}}>Pay using this account</button>{{/if}}
     {{/if}}
 
     {{#if allOk}}
