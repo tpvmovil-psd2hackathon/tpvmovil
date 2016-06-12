@@ -15,8 +15,8 @@ module.exports = function(req, res, next) {
          if (true) {
             req.user = yield User.find().limit(1)
             req.user = req.user[0]
-            req.token = yield Token.find().limit(1)
-            req.token = req.token[0]
+            //req.token = yield Token.find().limit(1)
+            //req.token = req.token[0]
             return next();
          }
 
