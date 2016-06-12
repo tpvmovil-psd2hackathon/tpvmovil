@@ -5,6 +5,7 @@ module.exports = function (environment) {
     modulePrefix: 'webapp',
     environment: environment,
     baseURL: '/',
+    apiHost: 'http://highfredo.me:1337',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
