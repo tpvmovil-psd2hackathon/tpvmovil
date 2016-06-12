@@ -16,6 +16,17 @@
       <button class="btn btn-primary" {{action 'pay' details.id details.bank_id}}>Pay using this account</button>
     {{/if}}
 
+    {{#if allOk}}
+      <p class="ok"><i class="fa fa-check"></i></p>
+      <p class="ok-text">Payment was succesful!</p>
+    {{/if}}
+
+    {{#if notOk}}
+      <div class="alert alert-danger" role="alert">
+        <p class="error">There was an error!</p>
+      </div>
+    {{/if}}
+
     {{outlet}}
 
   </div>
