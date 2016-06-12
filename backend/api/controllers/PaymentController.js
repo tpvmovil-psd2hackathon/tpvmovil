@@ -11,7 +11,7 @@ function requestPayment (req, res) {
    PaymentService.requestPayment(req.body.customer, req.body.hash, req.body.api_token).then(function (data) {
       var io = sails.io;
       //TODO only emit to the right listener
-      io.sockets.emit('Payment realized', {msg : 'paid'})
+      io.sockets.emit('payment', {msg : 'paid'})
       res.send(data);
    }).catch(function (e) {
       res.badRequest(e);
