@@ -4,15 +4,16 @@ var consumerKey = 'r4yhegdmtgbj4gnzbaabg0eludveqd53zxtxgdvg';
 
 module.exports = {
 
-   getCustomerToken: function (customerName, customerPass) {
+   getToken: function (username, pass) {
       var options = {
          url: 'https://apisandbox.openbankproject.com/my/logins/direct',
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',
             'Authorization':
-               `DirectLogin username="${customerName}", password="${customerPass}", consumer_key="${consumerKey}"`
-         }
+               `DirectLogin username="${username}", password="${pass}", consumer_key="${consumerKey}"`
+         },
+         json: true
       };
 
       return rp(options);

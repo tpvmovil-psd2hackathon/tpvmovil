@@ -1,9 +1,39 @@
-Mostrar aqui la info del usuario<br />
+<section class="container-fluid">
+  <div class="col-xs-12">
+    <h2 class="title text-center">Requested payment</h2>
 
-Sent hash: {{hashC}}<br />
+    <p class="amount">{{model.currency}} {{model.amount}}</p>
 
-Amount: {{model.amount}}<br />
-Currency: {{model.currency}}<br />
-Description: {{model.description}}<br />
+    <p class="text-center">to <strong>{{model.user.name}} {{model.user.lastName}}</strong> ({{model.user.company}})</p>
+
+    <p class="datetime">
+      <span><i class="fa fa-calendar"></i> {{format-date model.createdAt}}</span>
+      <span><i class="fa fa-clock-o"></i> {{format-time model.createdAt}}</span>
+    </p>
+
+    <p class="desc">{{model.description}}</p>
+
+    {{#if error}}
+      <div class="alert alert-danger" role="alert">
+        <p class="error">{{error}}</p>
+      </div>
+    {{/if}}
+
+    <form>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        {{input type="email" value=email class="form-control" id="exampleInputEmail1" placeholder="Email"}}
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        {{input type="password" value=password class="form-control" id="exampleInputPassword1" placeholder="Password"}}
+      </div>
+      <button {{action 'login'}} class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</section>
+
+
+
 
 {{outlet}}

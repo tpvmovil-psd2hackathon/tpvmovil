@@ -1,0 +1,56 @@
+@import 'bootstrap';
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+
+body {
+  font-family: Roboto;
+}
+
+.btn {
+  border: none;
+  border-radius: 0;
+}
+
+.title {
+  margin-top: 40px;
+}
+
+.btn-primary {
+  width: 100%;
+  line-height: 2em;
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+.main-container {
+  max-width: 400px;
+  margin: 50px auto;
+}
+
+.amount {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.desc {
+  margin: 30px 0;
+}
+
+.link {
+  cursor: pointer;
+  padding: 10px;
+  border: solid 1px black;
+  background-color: lighten(#286090, 60%);
+  &:hover {
+    background-color: lighten(#286090, 50%);
+  }
+}
+
+.datetime {
+  text-align: center;
+  span {
+    padding-right: 10px;
+  }
+}

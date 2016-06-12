@@ -29,5 +29,13 @@ module.exports = {
          type : 'string',
          required : true
       },
+      api_user: {
+         type : 'string',
+         required : true
+      },
+      api_pass: {
+         type : 'string',
+         required : true
+      }
    }
 }

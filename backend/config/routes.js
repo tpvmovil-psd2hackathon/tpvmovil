@@ -32,13 +32,15 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  },
+  // '/': {
+  //   view: 'homepage'
+  // },
 
-   'POST /api/login-customer': "CostumerController.loginCustomer",
+   'POST /api/login-customer': "CustomerController.loginCustomer",
    'GET /api/payment' : "PaymentController.getPayment",
-   'PUT /api/payment' : "PaymentController.putPayment"
+   'PUT /api/payment' : "PaymentController.putPayment",
+   'POST /api/requestPayment': "PaymentController.requestPayment",
+   'POST /api/user': "UserController.login",
 
   /***************************************************************************
   *                                                                          *

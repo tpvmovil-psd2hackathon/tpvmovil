@@ -19,13 +19,15 @@ module.exports.bootstrap = function(cb) {
             name : 'Pepe',
             lastName : 'Gotera',
             company : 'Pepe Gotera Inc',
-            bank_id : 'nordeaab',
-            account_id : 'DE79110100200000129917',
+            bank_id : 'at03-bank-x',
+            account_id : 'cd667972-c61e-42d5-971c-939f7ed6f8e1',
+            api_pass : "eb615d",
+            api_user : "alberto.segura.perez.x.x@example.com"
          })
          var payment  = yield Payment.create({
             hash : 'ada',
             amount : 40,
-            currency : 'EUR',
+            currency : 'GBP',
             description : 'Something nice',
             user : user
          })
