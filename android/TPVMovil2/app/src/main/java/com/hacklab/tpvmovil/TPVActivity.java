@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,8 +29,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import io.fabric.sdk.android.Fabric;
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 public class TPVActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -147,14 +153,38 @@ public class TPVActivity extends AppCompatActivity
                     e.printStackTrace();
                 }
 
-                String paymentUrl = "";
+                String paymentUrl = PaymentServiceImpl.BASE_URL_FRONT + "payment?hash=";
                 try {
                     JSONObject jsonObject = new JSONObject(createPayment);
-                    paymentUrl = jsonObject.getString("hash");
+                    paymentUrl += jsonObject.getString("hash");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
+                try {
+                    final Socket socketio= IO.socket(PaymentServiceImpl.BASE_URL_BACK+"");
+                    socketio.on(Socket.EVENT_MESSAGE, new Emitter.Listener(){
+
+                        @Override
+                        public void call(Object... args) {
+                            NotificationCompat.Builder mBuilder =
+                                    new NotificationCompat.Builder(TPVActivity.this)
+                                            .setSmallIcon(R.mipmap.ic_launcher)
+                                            .setContentTitle(getString(R.string.payment_notification_header))
+                                            .setContentText(getString(R.string.payment_notification_content));
+
+                            NotificationManagerCompat notificationManager =
+                                    NotificationManagerCompat.from(TPVActivity.this);
+
+                            notificationManager.notify(1, mBuilder.build());
+
+                            socketio.disconnect();
+                            socketio.close();
+                        }
+                    });
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
 
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");

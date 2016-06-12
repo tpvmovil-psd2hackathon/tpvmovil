@@ -13,7 +13,8 @@ import okhttp3.Response;
  */
 public class PaymentServiceImpl {
 
-    public static final String BASE_URL = "http://highfredo.me:1337/";
+    public static final String BASE_URL_BACK = "http://highfredo.me:1337/";
+    public static final String BASE_URL_FRONT = "http://highfredo.me:1337/";
 
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
@@ -21,7 +22,7 @@ public class PaymentServiceImpl {
     private OkHttpClient client = new OkHttpClient();
 
     public String login() throws IOException {
-        String url = BASE_URL+"user/login";
+        String url = BASE_URL_BACK+"user/login";
 
         RequestBody body = RequestBody.create(JSON, "{}");
         Request request = new Request.Builder()
@@ -33,7 +34,7 @@ public class PaymentServiceImpl {
     }
 
     public String createPayment(String json) throws IOException {
-        String url = BASE_URL+"api/payment";
+        String url = BASE_URL_BACK+"api/payment";
 
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder()

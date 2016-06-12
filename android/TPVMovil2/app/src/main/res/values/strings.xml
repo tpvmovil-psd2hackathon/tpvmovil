@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TPVMovil</string>
+    <string name="app_name">EasyPay</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -16,4 +16,8 @@
     <string name="share">Share</string>
     <string name="payment_url">Payment URL</string>
     <string name="title_activity_template">List of Templates</string>
+
+
+    <string name="payment_notification_header">Cobro realizado correctamente</string>
+    <string name="payment_notification_content">Su cobro se ha realizado correctamente</string>
 </resources>

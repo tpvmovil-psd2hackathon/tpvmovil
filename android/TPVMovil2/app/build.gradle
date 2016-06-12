@@ -52,4 +52,10 @@ dependencies {
     // GSON
     compile 'com.google.code.gson:gson:2.6.2'
 
+    // SocketIO
+    compile ('io.socket:socket.io-client:0.7.0') {
+        // excluding org.json which is provided by Android
+        exclude group: 'org.json', module: 'json'
+    }
+
 }
