@@ -163,7 +163,7 @@ public class TPVActivity extends AppCompatActivity
 
                 try {
                     final Socket socketio= IO.socket(PaymentServiceImpl.BASE_URL_BACK+"");
-                    socketio.on(Socket.EVENT_MESSAGE, new Emitter.Listener(){
+                    socketio.on("payment", new Emitter.Listener(){
 
                         @Override
                         public void call(Object... args) {

@@ -14,7 +14,7 @@ import okhttp3.Response;
 public class PaymentServiceImpl {
 
     public static final String BASE_URL_BACK = "http://highfredo.me:1337/";
-    public static final String BASE_URL_FRONT = "http://highfredo.me:1337/";
+    public static final String BASE_URL_FRONT = "http://highfredo.me:4200/";
 
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
