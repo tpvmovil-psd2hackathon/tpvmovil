@@ -10,4 +10,10 @@
     <string name="list_payments">List Payments</string>
     <string name="amount_label">Amount:</string>
     <string name="description_label">Payment description:</string>
+
+    <string name="payment_error">There was an error generating payment.</string>
+    <string name="payment_dialog_title">Your payment details</string>
+    <string name="share">Share</string>
+    <string name="payment_url">Payment URL</string>
+    <string name="title_activity_template">List of Templates</string>
 </resources>
