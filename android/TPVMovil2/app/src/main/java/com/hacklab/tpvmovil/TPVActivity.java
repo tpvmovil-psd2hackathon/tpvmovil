@@ -1,6 +1,8 @@
 package com.hacklab.tpvmovil;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -9,14 +11,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
-import com.hacklab.tpvmovil.service.dto.PaymentDetailsDTO;
-import com.hacklab.tpvmovil.service.enumerations.Currency;
+import com.google.gson.Gson;
+import com.hacklab.tpvmovil.payment.service.dto.PaymentDetailsDTO;
+import com.hacklab.tpvmovil.payment.service.enumerations.Currency;
+import com.hacklab.tpvmovil.payment.service.impl.PaymentServiceImpl;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -25,9 +35,35 @@ public class TPVActivity extends AppCompatActivity
 
     EditText amountEditText;
     Spinner currencySpinner;
+    EditText descriptionEditText;
+    Button createPaymentButton;
+
+    PaymentServiceImpl service;
+
+    private PaymentDetailsDTO payment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Intent intent = getIntent();
+        payment = new PaymentDetailsDTO();
+
+        try{
+            String description = intent.getExtras().getString("description");
+            Double amount = intent.getExtras().getDouble("amount");
+            String currency = intent.getExtras().getString("currency");
+
+
+            payment.setDescription(description);
+            payment.setAmount(amount);
+            for(Currency c : Currency.values()){
+                if(c.name().equalsIgnoreCase(currency)){
+                    payment.setCurrency(c);
+                    break;
+                }
+            }
+        } catch (Exception e){}
+
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_tpv);
@@ -43,11 +79,91 @@ public class TPVActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        service = new PaymentServiceImpl();
+
+        String login = null;
+        try {
+            login = service.login();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         currencySpinner = (Spinner) findViewById(R.id.currency);
+        amountEditText = (EditText) findViewById(R.id.amount);
+        descriptionEditText = (EditText) findViewById(R.id.description);
+        createPaymentButton = (Button) findViewById(R.id.createPayment);
+
+        currencySpinner.setSelection(payment.getCurrency().ordinal());
+
+        amountEditText.setText(payment.getAmount() != null ? payment.getAmount().toString() : "0.0");
+        descriptionEditText.setText(payment.getDescription());
 
         ArrayAdapter<Currency> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, Currency.values());
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         currencySpinner.setAdapter(adapter);
+
+        createPaymentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean err = false;
+
+                if( amountEditText.getText().toString().trim().equals("")){
+                    amountEditText.setError( "Amount is required!" );
+                    err = true;
+                }
+                if( descriptionEditText.getText().toString().trim().equals("")){
+                    descriptionEditText.setError( "Description is required!" );
+                    err = true;
+                }
+
+                if(err){
+                    return;
+                }
+
+                String createPayment = null;
+
+                payment.setAmount(new Double(amountEditText.getText().toString()));
+                payment.setDescription(descriptionEditText.getText().toString());
+
+                String currencySpinner = TPVActivity.this.currencySpinner.getSelectedItem().toString();
+                String currencyString = currencySpinner.split(" ")[0];
+                for(Currency currency : Currency.values()){
+                    if(currency.name().equalsIgnoreCase(currencyString)){
+                        payment.setCurrency(currency);
+                        break;
+                    }
+                }
+
+                Gson gson = new Gson();
+                String jsonRepresentation = gson.toJson(payment);
+                jsonRepresentation = "{\"payment\":" + jsonRepresentation + "}";
+
+                try{
+                    createPayment = service.createPayment(jsonRepresentation);
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
+
+                String paymentUrl = "";
+                try {
+                    JSONObject jsonObject = new JSONObject(createPayment);
+                    paymentUrl = jsonObject.getString("hash");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.payment_url));
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, paymentUrl);
+                startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.share)));
+
+            }
+        });
 
     }
 
@@ -92,7 +208,8 @@ public class TPVActivity extends AppCompatActivity
         if (id == R.id.nav_create_payment) {
             // Handle the camera action
         } else if (id == R.id.nav_list_payments) {
-
+            Intent i = new Intent(this, TemplateActivity.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
