@@ -5,7 +5,6 @@ module.exports = {
 function index (req, res){
    //var socket = req.socket;
    var io = sails.io;
-   console.log('a')
 
    io.sockets.emit('Hi', {a : 'a'})
 
