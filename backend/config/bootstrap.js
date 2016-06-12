@@ -12,6 +12,16 @@ var q = require('q')
 module.exports.bootstrap = function(cb) {
    q.spawn(function *() {
       try {
+         var socketIOClient = require('socket.io-client');
+         var sailsIOClient = require('sails.io.js');
+
+// Instantiate the socket client (`io`)
+         var io = sailsIOClient(socketIOClient);
+         io.sails.url = 'http://localhost:1337';
+         //sails.io.on('connection', function(a){console.log('connected', a)})
+
+
+
          //Create mock user
          var user = yield User.create({
             username : 'pepe',

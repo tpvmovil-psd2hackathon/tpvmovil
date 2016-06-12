@@ -23,6 +23,7 @@ export default Ember.Controller.extend({
         },
       }).then(res => {
         this.get('ajax').set('myToken', res.token);
+        this.get('ajax').set('myHash', this.get('displayHash'));
         this.transitionToRoute('accounts');
       }, (e) => {
         this.set('error', e);
