@@ -23,17 +23,17 @@ export default Ember.Controller.extend({
 
     pay(id, bankId) {
       console.log(id, bankId);
-      this.get('ajax').post('/api/payment/requestPayment', {
+      this.get('ajax').post('/requestPayment', {
         headers: {
           Authorization: `DirectLogin token="${this.get('ajax.myToken')}"`,
         },
-        data: {
+        data: JSON.stringify({
           customer: {
             bank_id: bankId,
             account_id: id,
           },
           hash: this.get('ajax.myToken'),
-        },
+        }),
       }).then(res => {
         console.log(res);
       }, (e) => {

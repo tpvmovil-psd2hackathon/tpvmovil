@@ -1,7 +1,7 @@
 <section class="container-fluid">
-  <div class="main-container">
+  <div class="col-xs-12">
 
-    <h1>Accounts details</h1>
+    <h2 class="title text-center">My accounts</h2>
 
     {{#each model as |account|}}
       <p class="link" {{action 'details' account._links.detail.href}}>
