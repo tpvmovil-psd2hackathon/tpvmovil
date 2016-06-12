@@ -162,7 +162,7 @@ public class TPVActivity extends AppCompatActivity
                 }
 
                 try {
-                    final Socket socketio= IO.socket(PaymentServiceImpl.BASE_URL_BACK+"");
+                    final Socket socketio= IO.socket("http://highfredo.me:1337");
                     socketio.on("payment", new Emitter.Listener(){
 
                         @Override
@@ -182,9 +182,12 @@ public class TPVActivity extends AppCompatActivity
                             socketio.close();
                         }
                     });
+
+                    socketio.connect();
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
                 }
+
 
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
