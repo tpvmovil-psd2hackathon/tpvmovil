@@ -18,15 +18,15 @@ function requestPayment(customer, hash, api_token) {
 
       console.log(customer, hash, paymentInfo);
 
-      var BANK_ID = paymentInfo.user.bank_id
-      var ACCOUNT_ID = paymentInfo.user.account_id
+      var BANK_ID = customer.bank_id//paymentInfo.user.bank_id
+      var ACCOUNT_ID = customer.account_id//paymentInfo.user.account_id
       var VIEW_ID = "VIEW_ID"
       var TRANSACTION_REQUEST_TYPE = "SANDBOX_TAN";
 
       var payload = {
          "to": {
-            "bank_id": customer.bank_id,
-            "account_id": customer.account_id
+            "bank_id": paymentInfo.user.bank_id, //customer.bank_id,
+            "account_id": paymentInfo.user.account_id //customer.account_id
          },
          "value": {
             "currency": paymentInfo.currency,
